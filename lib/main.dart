@@ -7,7 +7,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  TextEditingController token_Controller = TextEditingController();
 
 
   @override
@@ -51,27 +50,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'APP LOJISTA',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+
+                Text("before sending notification put motoboyappbug app token on sendNotificationMap"),
+
+
+            TextButton(onPressed: (){
+              SendNotification();
+            }, child: Text("send notification")),
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          EnviarNotificacaoMotoboy();
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-  static EnviarNotificacaoMotoboy() async {
+   SendNotification() async {
     Map<String, String> headerMap =
     {
       'Content-Type': 'application/json',
@@ -109,8 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
       "data": dataMap,
       "priority": "high",
       "timeToLive": 60 * 60 * 24,
-    // colar o token do motoboy
-      "to":"dLvdn6lFRkauu7MrQVDCfd:APA91bFtGhvzRuYRb-0H85-52vgT4DFCRK140cZ-DaaSvg5pa2b1HAfvVb8Qlo48nHWgzk1caIIt5HsWjcr5gjkeUh1g-r9ChlCM3p_3Bp5j8SCxLRMqTDfGLczxTgiyrGuQxc4o9K9p",
+      // token
+      "to":"",
     };
 
     var res = await http.post(
